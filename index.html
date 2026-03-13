@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Electronics Store</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+
+body{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 10%;
+background:rgba(0,0,0,0.4);
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#00e5ff;
+}
+
+nav ul{
+display:flex;
+gap:20px;
+list-style:none;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:100px 20px;
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:25px;
+}
+
+.btn{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#00e5ff;
+font-weight:bold;
+cursor:pointer;
+text-decoration:none;
+color:black;
+}
+
+.btn:hover{
+background:white;
+}
+
+/* PRODUCTS */
+
+.products{
+padding:80px 10%;
+}
+
+.products h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+.card img{
+width:100%;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.price{
+color:#00e5ff;
+font-size:20px;
+margin:10px 0;
+}
+
+/* CART */
+
+.cart{
+padding:60px 10%;
+background:rgba(0,0,0,0.3);
+}
+
+.cart ul{
+margin-top:20px;
+}
+
+.cart li{
+margin:5px 0;
+}
+
+/* EMI */
+
+.emi{
+padding:80px 10%;
+text-align:center;
+}
+
+input,textarea{
+padding:10px;
+margin:10px;
+border-radius:5px;
+border:none;
+width:250px;
+}
+
+/* CONTACT */
+
+.contact{
+padding:80px 10%;
+text-align:center;
+}
+
+textarea{
+width:100%;
+height:80px;
+}
+
+/* REVIEWS */
+
+.reviews{
+padding:80px 10%;
+text-align:center;
+}
+
+.review-box{
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:10px;
+margin:15px;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:16px;
+border-radius:50%;
+font-size:24px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:20px;
+background:black;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+<div class="logo">Smart Electronics</div>
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#cart">Cart</a></li>
+<li><a href="#contact">Order</a></li>
+</ul>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>Premium Electronics at Affordable Prices</h1>
+
+<p>Starting from ₹5000 with Easy EMI</p>
+
+<a class="btn" href="tel:7626846329">📞 Call Now</a>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section class="products" id="products">
+
+<h2>Popular Electronics</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+<h3>Smartphone</h3>
+<p class="price">₹9999</p>
+<button class="btn" onclick="addCart('Smartphone',9999)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8">
+<h3>Laptop</h3>
+<p class="price">₹25000</p>
+<button class="btn" onclick="addCart('Laptop',25000)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad">
+<h3>Wireless Earbuds</h3>
+<p class="price">₹5000</p>
+<button class="btn" onclick="addCart('Earbuds',5000)">Add to Cart</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- CART -->
+
+<section class="cart" id="cart">
+
+<h2>Your Cart</h2>
+
+<ul id="cartItems"></ul>
+
+<p>Total: ₹<span id="total">0</span></p>
+
+</section>
+
+<!-- EMI -->
+
+<section class="emi">
+
+<h2>EMI Calculator</h2>
+
+<input type="number" id="price" placeholder="Product Price">
+
+<input type="number" id="months" placeholder="Months">
+
+<br>
+
+<button class="btn" onclick="calculateEMI()">Calculate</button>
+
+<p id="emiResult"></p>
+
+</section>
+
+<!-- REVIEWS -->
+
+<section class="reviews">
+
+<h2>Customer Reviews</h2>
+
+<div class="review-box">⭐ Best electronics store with good prices.</div>
+<div class="review-box">⭐ EMI option made buying easy.</div>
+<div class="review-box">⭐ Trusted quality products.</div>
+
+</section>
+
+<!-- ORDER FORM -->
+
+<section class="contact" id="contact">
+
+<h2>Place Your Order</h2>
+
+<form onsubmit="sendOrder();return false;">
+
+<input type="text" id="name" placeholder="Your Name" required>
+
+<br>
+
+<input type="tel" id="phone" placeholder="Your Phone Number" required>
+
+<br>
+
+<textarea id="address" placeholder="Your Address"></textarea>
+
+<br>
+
+<button class="btn">Send Order</button>
+
+</form>
+
+<p style="margin-top:20px">
+📞 7626846329 <br>
+📧 anshmaan14@gmail.com
+</p>
+
+</section>
+
+<!-- WHATSAPP -->
+
+<a class="whatsapp" href="https://wa.me/917626846329?text=Hello%20I%20want%20to%20buy%20electronics">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© 2026 Smart Electronics Store | Quality Over Quantity</p>
+
+</footer>
+
+<script>
+
+let cart=[]
+let total=0
+
+function addCart(name,price){
+
+cart.push(name+" ₹"+price)
+
+total+=price
+
+updateCart()
+
+}
+
+function updateCart(){
+
+let list=document.getElementById("cartItems")
+
+list.innerHTML=""
+
+cart.forEach(item=>{
+let li=document.createElement("li")
+li.textContent=item
+list.appendChild(li)
+})
+
+document.getElementById("total").innerText=total
+
+}
+
+function calculateEMI(){
+
+let price=document.getElementById("price").value
+let months=document.getElementById("months").value
+
+let emi=price/months
+
+document.getElementById("emiResult").innerHTML="Monthly EMI: ₹"+emi.toFixed(2)
+
+}
+
+function sendOrder(){
+
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let address=document.getElementById("address").value
+
+let order=cart.join(", ")
+
+let body="Name:"+name+" Phone:"+phone+" Address:"+address+" Order:"+order+" Total:"+total
+
+window.location.href="mailto:anshmaan14@gmail.com?subject=New Order&body="+body
+
+}
+
+</script>
+
+</body>
+</html>
